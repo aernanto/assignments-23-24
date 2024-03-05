@@ -153,7 +153,7 @@ public class OrderGenerator {
                 "Order ID: " + orderID + "\n" +
                 "Tanggal Pemesanan: " + tanggalOrderDenganFormat + "\n" +
                 "Lokasi Pengiriman: " + lokasi.toUpperCase() + "\n" +
-                "Biaya Ongkos Kirim: " + biayaDeliveryDenganFormat.replace(",", ".");
+                "Biaya Ongkos Kirim: " + biayaDeliveryDenganFormat.replace(",", ".") + "\n";
     }
 
     // Untuk bagi bagian dari ID Order
