@@ -1,10 +1,51 @@
-package main.java.assignments.assignment2;
+package assignments.assignment2;
+
+import java.util.ArrayList;
 
 public class Order {
-     // TODO: tambahkan attributes yang diperlukan untuk class ini
-    public Order(String orderId, String tanggal, int ongkir, Restaurant resto, Menu[] items){
-        // TODO: buat constructor untuk class ini
+    private String orderID;
+    private String tanggalPemesanan;
+    private Restaurant restaurant;
+    private ArrayList<Menu> items;
+    private boolean orderFinished;
+    private double biayaOngkosKirim;
+
+    public Order(String orderID, String tanggalPemesanan, Restaurant restaurant, ArrayList<Menu> items, boolean orderFinished, double biayaOngkosKirim) {
+        this.orderID = orderID;
+        this.tanggalPemesanan = tanggalPemesanan;
+        this.restaurant = restaurant;
+        this.items = items;
+        this.orderFinished = orderFinished;
+        this.biayaOngkosKirim = biayaOngkosKirim;
     }
-    
-    // TODO: tambahkan methods yang diperlukan untuk class ini
+
+    // Getter method for biayaOngkosKirim
+    public double getBiayaOngkosKirim() {
+        return biayaOngkosKirim;
+    }
+
+    // Other getter and setter methods
+    public String getOrderID() {
+        return orderID;
+    }
+
+    public String getTanggalPemesanan() {
+        return tanggalPemesanan;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public ArrayList<Menu> getItems() {
+        return items;
+    }
+
+    public boolean isOrderFinished() {
+        return orderFinished;
+    }
+
+    public void setOrderFinished(boolean orderFinished) {
+        this.orderFinished = orderFinished;
+    }
 }
