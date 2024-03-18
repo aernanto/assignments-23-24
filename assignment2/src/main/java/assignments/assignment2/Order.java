@@ -2,15 +2,15 @@ package assignments.assignment2;
 
 import java.util.ArrayList;
 
-public class Order {
+public class Order {  
     private String orderID;
     private String tanggalPemesanan;
     private Restaurant restaurant;
     private ArrayList<Menu> items;
     private boolean orderFinished;
-    private double biayaOngkosKirim;
+    private Integer biayaOngkosKirim;
 
-    public Order(String orderID, String tanggalPemesanan, Restaurant restaurant, ArrayList<Menu> items, boolean orderFinished, double biayaOngkosKirim) {
+    public Order(String orderID, String tanggalPemesanan, Restaurant restaurant, ArrayList<Menu> items, boolean orderFinished, int biayaOngkosKirim) {
         this.orderID = orderID;
         this.tanggalPemesanan = tanggalPemesanan;
         this.restaurant = restaurant;
@@ -20,7 +20,7 @@ public class Order {
     }
 
     // Getter method for biayaOngkosKirim
-    public double getBiayaOngkosKirim() {
+    public Integer getBiayaOngkosKirim() {
         return biayaOngkosKirim;
     }
 
