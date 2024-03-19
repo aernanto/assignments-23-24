@@ -1,3 +1,8 @@
+/*  Nama    : Aimee Callista Ferlintera Prudence Ernanto
+    NPM     : 2306165963
+    Kelas   : DDP 2-B
+ */
+
 package assignments.assignment2;
 
 import java.util.Scanner;
