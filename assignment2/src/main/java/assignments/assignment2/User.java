@@ -10,7 +10,7 @@ public class User {
     private ArrayList<Order> orderHistory;
     private String lokasi;
 
-    public User(String nama, String nomorTelepon, String email, String role, String lokasi) {
+    public User(String nama, String nomorTelepon, String email, String lokasi, String role) {
         this.nama = nama;
         this.nomorTelepon = nomorTelepon;
         this.email = email;
