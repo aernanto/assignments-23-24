@@ -2,6 +2,7 @@ package assignments.assignment2;
 
 import java.util.ArrayList;
 
+// Class User, memuat nama, nomorTelepon, email, role, ordeerHistory dalam ArrayList, dan lokasi
 public class User {
     private String nama;
     private String nomorTelepon;

@@ -2,6 +2,7 @@ package assignments.assignment2;
 
 import java.util.ArrayList;
 
+// Class Order, memuat orderID, tanggalPemesanan, restaurant, items dalam ArrayList, orderFinished, dan biayaOngkosKirim
 public class Order {  
     private String orderID;
     private String tanggalPemesanan;
@@ -19,12 +20,10 @@ public class Order {
         this.biayaOngkosKirim = biayaOngkosKirim;
     }
 
-    // Getter method for biayaOngkosKirim
     public Integer getBiayaOngkosKirim() {
         return biayaOngkosKirim;
     }
 
-    // Other getter and setter methods
     public String getOrderID() {
         return orderID;
     }

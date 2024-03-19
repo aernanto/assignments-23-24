@@ -2,6 +2,7 @@ package assignments.assignment2;
 
 import java.util.ArrayList;
 
+// Class Restaurant, memuat nama dan menu dalam ArrayList
 public class Restaurant {
     private String nama;
     private ArrayList<Menu> menu;
