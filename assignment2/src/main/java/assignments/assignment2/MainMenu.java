@@ -23,55 +23,158 @@ public class MainMenu {
         while (programRunning) {
             printHeader();
             startMenu();
-            int command = input.nextInt();
-            input.nextLine();
-
-            if(command == 1){
-                System.out.println("\nSilakan Login:");
-                System.out.print("Nama: ");
-                String nama = input.nextLine();
-                System.out.print("Nomor Telepon: ");
-                String noTelp = input.nextLine();
-
-                User userLoggedIn; 
-                boolean isLoggedIn = true;
-
-                if(userLoggedIn.role == "Customer"){
-                    while (isLoggedIn){
-                        menuCustomer();
-                        int commandCust = input.nextInt();
-                        input.nextLine();
-
-                        switch(commandCust){
-                            case 1 -> handleBuatPesanan();
-                            case 2 -> handleCetakBill();
-                            case 3 -> handleLihatMenu();
-                            case 4 -> handleUpdateStatusPesanan();
-                            case 5 -> isLoggedIn = false;
-                            default -> System.out.println("Perintah tidak diketahui, silakan coba kembali");
+            if (input.hasNextInt()) {
+                int command = input.nextInt();
+                input.nextLine();
+        
+                // jika user memilih 1
+                if (command == 1) {
+                    System.out.println("\nSilahkan Login:");
+                    System.out.print("Nama: ");
+                    String nama = input.nextLine();
+                    System.out.print("Nomor Telepon: ");
+                    String noTelp = input.nextLine();
+        
+                    User userLoggedIn = getUser(nama, noTelp);
+                    boolean isLoggedIn = true;
+                    if (userLoggedIn != null) {
+                        if (userLoggedIn.getNama().equalsIgnoreCase("Admin") || userLoggedIn.getNama().equalsIgnoreCase("Admin Baik")) {
+                            while (isLoggedIn) {
+                                menuAdmin();
+                                if (input.hasNextInt()) {
+                                    int commandAdmin = input.nextInt();
+                                    input.nextLine();
+        
+                                    // Command admin
+                                    switch (commandAdmin) {
+                                        case 1:
+                                            handleTambahRestoran();
+                                            break;
+                                        case 2:
+                                            handleHapusRestoran();
+                                            break;
+                                        case 3:
+                                            isLoggedIn = false;
+                                            break;
+                                        default:
+                                            System.out.println("Perintah tidak diketahui, silakan coba kembali");
+                                            break;
+                                    }
+                                } else {
+                                    System.out.println("Perintah tidak valid. Silakan coba kembali.");
+                                    input.nextLine(); // Consume invalid input
+                                }
+                            }
+                        } else {
+                            while (isLoggedIn) {
+                                menuCustomer();
+                                if (input.hasNextInt()) {
+                                    int commandCust = input.nextInt();
+                                    input.nextLine();
+        
+                                    // Command customer
+                                    switch (commandCust) {
+                                        case 1:
+                                            handleBuatPesanan();
+                                            break;
+                                        case 2:
+                                            handleCetakBill();
+                                            break;
+                                        case 3:
+                                            handleLihatMenu();
+                                            break;
+                                        case 4:
+                                            handleUpdateStatusPesanan();
+                                            break;
+                                        case 5:
+                                            isLoggedIn = false;
+                                            break;
+                                        default:
+                                            System.out.println("Perintah tidak diketahui, silakan coba kembali");
+                                            break;
+                                    }
+                                } else {
+                                    System.out.println("Perintah tidak valid. Silakan coba kembali.");
+                                    input.nextLine(); 
+                                }
+                            }
                         }
+                    } else {
+                        System.out.println("Pengguna dengan data tersebut tidak ditemukan!");
                     }
-                }else{
-                    while (isLoggedIn){
-                        menuAdmin();
-                        int commandAdmin = input.nextInt();
-                        input.nextLine();
-
-                        switch(commandAdmin){
-                            case 1 -> handleTambahRestoran();
-                            case 2 -> handleHapusRestoran();
-                            case 5 -> isLoggedIn = false;
-                            default -> System.out.println("Perintah tidak diketahui, silakan coba kembali");
-                        }
-                    }
+                // jika user memilih 2
+                } else if (command == 2) {
+                    programRunning = false;
+                } else {
+                    System.out.println("Perintah tidak diketahui, silakan periksa kembali.");
                 }
-            }else if(command == 2){
-                programRunning = false;
-            }else{
-                System.out.println("Perintah tidak diketahui, silakan periksa kembali.");
+            } else {
+                System.out.println("Perintah tidak valid. Silakan coba kembali.");
+                input.nextLine(); 
             }
         }
-        System.out.println("\nTerima kasih telah menggunakan DepeFood ^___^");
+        System.out.println("\nTerima kasih telah menggunakan DepeFood!");
+    }    
+
+    // Untuk mengecek apakah tanggal valid (DD/MM/YYYY)
+    // Imported from OrderGenerator.java
+    public static boolean isValidTanggal(String tanggal) {
+        if (tanggal.length() != 10) {
+            return false;
+        }
+
+        int hari = 0, bulan = 0, tahun = 0;
+        int awal = 0;
+        for (int i = 0; i < tanggal.length(); i++) {
+            if (tanggal.charAt(i) == '/') {
+                if (hari == 0) {
+                    hari = toInt(tanggal.substring(awal, i)); // Peng-convert-an ke integer
+                    awal = i + 1;
+                } else if (bulan == 0) {
+                    bulan = toInt(tanggal.substring(awal, i)); // Peng-convert-an ke integer
+                    awal = i + 1;
+                }
+            }
+        }
+        tahun = toInt(tanggal.substring(awal)); // Peng-convert-an ke integer
+        if (hari < 1 || hari > 31 || bulan < 1 || bulan > 12 || tahun < 1000) {
+            return false;
+        }
+        if (!isTanggalValid(hari, bulan, tahun)) {
+            return false;
+        }
+        return true;
+    }
+
+    // Untuk cek apakah nomor telepon valid
+    // imported from OrderGenerator.java
+    public static boolean isValidNoTelp(String noTelp) {
+        for (int i = 0; i < noTelp.length(); i++) {
+            char digit = noTelp.charAt(i);
+            if (digit < '0' || digit > '9') {
+                return false; // Jika karakter bukan digit maka akan return false
+            }
+        }
+        return !noTelp.isEmpty(); // Jika no telp kosong
+    }  
+
+    // Untuk mengecek apakah hari, bulan, dan tanggal memenuhi kriteria penanggalan
+    // imported from OrderGenerator.java
+    public static boolean isTanggalValid(int hari, int bulan, int tahun) {
+        if (bulan < 1 || bulan > 12) {
+            return false;
+        }
+        int[] hariSetiapBulannya = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        if (bulan == 2 && isTahunKabisat(tahun)) {
+            hariSetiapBulannya[1] = 29;
+        }
+        return hari >= 1 && hari <= hariSetiapBulannya[bulan - 1];
+    }
+
+    // Kondisi tahun kabisat
+    // Imported from OrderGenerator.java
+    public static boolean isTahunKabisat(int tahun) {
+        return (tahun % 400 == 0) || ((tahun % 4 == 0) && (tahun % 100 != 0));
     }
 
     // Getter user

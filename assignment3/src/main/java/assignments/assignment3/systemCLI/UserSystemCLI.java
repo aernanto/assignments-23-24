@@ -1,18 +1,12 @@
+/*  Nama    : Aimee Callista Ferlintera Prudence Ernanto
+    NPM     : 2306165963
+    Kelas   : DDP 2-B
+ */
+
 package assignments.assignment3.systemCLI;
 
-import java.util.Scanner;
-
-public abstract class UserSystemCLI {
-    protected Scanner input;
-    public void run() {
-        boolean isLoggedIn = true;
-        while (isLoggedIn) {
-            displayMenu();
-            int command = input.nextInt();
-            input.nextLine();
-            isLoggedIn = handleMenu(command);
-        }
-    }
-    abstract void displayMenu();
-    abstract boolean handleMenu(int command);
+public interface UserSystemCLI {
+    void displayMenu();
+    boolean handleMenu(int command);
+    void run();
 }

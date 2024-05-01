@@ -1,14 +1,15 @@
-package assignments.assignment3.systemCLI;
+/*  Nama    : Aimee Callista Ferlintera Prudence Ernanto
+    NPM     : 2306165963
+    Kelas   : DDP 2-B
+ */
 
-import assignments.assignment3.systemCLI.AdminSystemCLI;
-import assignments.assignment3.systemCLI.CustomerSystemCLI;
-import assignments.assignment3.systemCLI.UserSystemCLI;
+package assignments.assignment3.systemCLI;
 
 public class LoginManager {
     private AdminSystemCLI adminSystem;
-    private CustomerSystemCLI customerSystem;
+    private UserSystemCLI customerSystem;
 
-    public LoginManager(AdminSystemCLI adminSystem, CustomerSystemCLI customerSystem) {
+    public LoginManager(AdminSystemCLI adminSystem, UserSystemCLI customerSystem) {
         this.adminSystem = adminSystem;
         this.customerSystem = customerSystem;
     }
