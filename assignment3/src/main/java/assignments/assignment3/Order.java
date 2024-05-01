@@ -5,51 +5,86 @@
 
 package assignments.assignment3;
 
-import java.util.ArrayList;
-
-// Class Order, memuat orderID, tanggalPemesanan, restaurant, items dalam ArrayList, orderFinished, dan biayaOngkosKirim
-public class Order {  
-    private String orderID;
-    private String tanggalPemesanan;
+// Definisi kelas Order
+public class Order {
+    private String OrderId;
+    private String tanggal;
+    private int ongkir;
     private Restaurant restaurant;
-    private ArrayList<Menu> items;
     private boolean orderFinished;
-    private Integer biayaOngkosKirim;
+    private Menu[] items;
 
-    public Order(String orderID, String tanggalPemesanan, Restaurant restaurant, ArrayList<Menu> items, boolean orderFinished, int biayaOngkosKirim) {
-        this.orderID = orderID;
-        this.tanggalPemesanan = tanggalPemesanan;
-        this.restaurant = restaurant;
+    // Constructor Order
+    public Order(String orderId, String tanggal, int ongkir, Restaurant resto, Menu[] items){
+        this.OrderId = orderId;
+        this.tanggal = tanggal;
+        this.ongkir = ongkir;
+        this.restaurant = resto;
+        this.orderFinished = false;
         this.items = items;
-        this.orderFinished = orderFinished;
-        this.biayaOngkosKirim = biayaOngkosKirim;
     }
-
-    public Integer getBiayaOngkosKirim() {
-        return biayaOngkosKirim;
-    }
-
-    public String getOrderID() {
-        return orderID;
-    }
-
-    public String getTanggalPemesanan() {
-        return tanggalPemesanan;
-    }
-
+    
+    // Getter restaurant
     public Restaurant getRestaurant() {
         return restaurant;
     }
 
-    public ArrayList<Menu> getItems() {
+    // Getter finished order
+    public boolean getOrderFinished(){
+        return this.orderFinished;
+    }
+
+    // Setter finished order
+    public void setOrderFinished(boolean orderFinished) {
+        this.orderFinished = orderFinished;
+    }
+
+    // Getter Order ID
+    public String getOrderId() {
+        return OrderId;
+    }
+
+    // Getter Tanggal
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    // Getter ongkir
+    public int getOngkir() {
+        return ongkir;
+    }
+
+    // Getter items
+    public Menu[] getItems() {
         return items;
     }
 
-    public boolean isOrderFinished() {
-        return orderFinished;
+    // Getter sorted menu
+    public Menu[] getSortedMenu(){
+        Menu[] menuArr = new Menu[getItems().length];
+        for(int i=0; i < getItems().length;i++){
+            menuArr[i] = getItems()[i];
+        }
+        int n = menuArr.length;
+        for (int i = 0; i < n-1; i++) {
+            for (int j = 0; j < n-i-1; j++) {
+                if (menuArr[j].getHarga() > menuArr[j+1].getHarga()) {
+                    
+                    Menu temp = menuArr[j];
+                    menuArr[j] = menuArr[j+1];
+                    menuArr[j+1] = temp;
+                }
+            }
+        }
+        return menuArr;
     }
 
-    public void setOrderFinished(boolean orderFinished) {
-        this.orderFinished = orderFinished;
+    // Getter total harga
+    public double getTotalHarga(){
+        double sum = 0;
+        for(Menu menu: getItems()){
+            sum += menu.getHarga();
+        }
+        return sum += getOngkir();
     }
 }

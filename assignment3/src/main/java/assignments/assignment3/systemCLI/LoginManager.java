@@ -9,11 +9,13 @@ public class LoginManager {
     private AdminSystemCLI adminSystem;
     private UserSystemCLI customerSystem;
 
+    // Constructor Login Manager
     public LoginManager(AdminSystemCLI adminSystem, UserSystemCLI customerSystem) {
         this.adminSystem = adminSystem;
         this.customerSystem = customerSystem;
     }
 
+    // Role
     public UserSystemCLI getSystem(String role) {
         if (role.equalsIgnoreCase("admin")) {
             return adminSystem;

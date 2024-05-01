@@ -5,6 +5,7 @@
 
 package assignments.assignment3.systemCLI;
 
+// Interface UserSystemCLI
 public interface UserSystemCLI {
     void displayMenu();
     boolean handleMenu(int command);

@@ -5,21 +5,24 @@
 
 package assignments.assignment3;
 
-// Class Menu, memuat namaMakanan dan harga
+// Definis kelas Menu
 public class Menu {
     private String namaMakanan;
-    private double harga;
+    private double harga; 
 
-    public Menu(String namaMakanan, double harga) {
+    // Constructor Menu
+    public Menu(String namaMakanan, double harga){
         this.namaMakanan = namaMakanan;
         this.harga = harga;
     }
 
-    public String getNamaMakanan() {
-        return namaMakanan;
-    }
-
+    // Getter harga
     public double getHarga() {
         return harga;
+    }
+
+    // Getter nama makanan
+    public String getNamaMakanan() {
+        return namaMakanan;
     }
 }

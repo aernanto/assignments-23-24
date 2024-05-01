@@ -20,6 +20,7 @@ public class AdminSystemCLI implements UserSystemCLI {
         this.restoList = restoList;
     }
 
+    // Display menu
     @Override
     public void displayMenu() {
         System.out.println("\n--------------------------------------------");
@@ -31,6 +32,7 @@ public class AdminSystemCLI implements UserSystemCLI {
         System.out.print("Pilihan menu: ");
     }
 
+    // Handle menu
     @Override
     public boolean handleMenu(int command) {
         switch (command) {
@@ -48,6 +50,18 @@ public class AdminSystemCLI implements UserSystemCLI {
         }
     }
 
+    // Running
+    @Override
+    public void run() {
+        boolean keepRunning = true;
+        while (keepRunning) {
+            displayMenu();
+            int command = Integer.parseInt(input.nextLine()); 
+            keepRunning = handleMenu(command);
+        }
+    }
+
+    // Handle tambah restoran
     private void handleTambahRestoran() {
         System.out.println("--------------Tambah Restoran----------------");
         String name;
@@ -70,7 +84,7 @@ public class AdminSystemCLI implements UserSystemCLI {
         int count = Integer.parseInt(input.nextLine());
 
         for (int i = 0; i < count; i++) {
-            System.out.print("Masukkan nama dan harga makanan (contoh: Pizza 20000): ");
+            System.out.print("Masukkan nama dan harga makanan: ");
             String foodInput = input.nextLine();
             String[] parts = foodInput.split("\\s+");
             try {
@@ -79,7 +93,7 @@ public class AdminSystemCLI implements UserSystemCLI {
                 menuList.add(new Menu(foodName, price));
             } catch (NumberFormatException e) {
                 System.out.println("Harga harus berupa angka. Silakan masukkan kembali.");
-                i--; // Decrement to repeat the input for this item
+                i--; 
             }
         }
 
@@ -88,6 +102,7 @@ public class AdminSystemCLI implements UserSystemCLI {
         System.out.println("Restaurant " + name + " berhasil terdaftar.");
     }
 
+    // Handle hapus restoran
     private void handleHapusRestoran() {
         System.out.println("\n--------------Hapus Restoran----------------");
         System.out.print("Nama Restoran: ");
@@ -106,6 +121,7 @@ public class AdminSystemCLI implements UserSystemCLI {
         }
     }
 
+    // Kalau restoran ada
     private boolean isRestoranExist(String name) {
         for (Restaurant restaurant : restoList) {
             if (restaurant.getNama().toLowerCase().equals(name)) {

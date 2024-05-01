@@ -17,11 +17,13 @@ public class MainMenu {
     private final LoginManager loginManager;
     private static ArrayList<User> userList;
 
+    // Constructor MainMenu
     public MainMenu(Scanner input, LoginManager loginManager) {
         this.input = input;
         this.loginManager = loginManager;
     }
 
+    // Running
     public void run() {
         boolean running = true;
 
@@ -36,18 +38,21 @@ public class MainMenu {
         }
     }
 
+    // Header
     private void printHeader() {
         System.out.println("\n-----------------------------");
         System.out.println("   SELAMAT DATANG DI DepeFood  ");
         System.out.println("-----------------------------\n");
     }
 
+    // Login
     private UserSystemCLI login() {
         System.out.print("Masukkan peran (Admin / Customer): ");
         String role = input.nextLine();
         return loginManager.getSystem(role);
     }
 
+    // Init User
     public static void initUser() {
         userList = new ArrayList<>();
 

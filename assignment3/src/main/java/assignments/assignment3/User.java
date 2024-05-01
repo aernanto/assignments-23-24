@@ -6,11 +6,10 @@
 package assignments.assignment3;
 
 import java.util.ArrayList;
-
 import assignments.assignment3.payment.DepeFoodPaymentSystem;
-// Kelas User
+
+// Definisi kelas User
 public class User {
-    // Instansi kelas User
     private String nama;
     private String nomorTelepon;
     private String email;
@@ -20,7 +19,7 @@ public class User {
     private DepeFoodPaymentSystem payment;
     private long saldo;
 
-    // Konstruktor User
+    // Constructor
     public User(String nama, String nomorTelepon, String email, String lokasi, String role, DepeFoodPaymentSystem payment, long saldo) {
         this.nama = nama;
         this.nomorTelepon = nomorTelepon;
@@ -28,70 +27,47 @@ public class User {
         this.lokasi = lokasi;
         this.role = role;
         this.orderHistory = new ArrayList<>();
-        this.saldo = 0;
+        this.payment = payment;
+        this.saldo = saldo;
     }
 
-    // Getter untuk nama
+    // Getter nama
     public String getNama() {
         return nama;
     }
 
-    // Getter untuk nomorTelepon
+    // Getter nomor telepon
     public String getNomorTelepon() {
         return nomorTelepon;
     }
 
-    // Getter untuk email
+    // Getter email
     public String getEmail() {
         return email;
     }
 
-    // Getter untuk lokasi
+    // Getter lokasi
     public String getLokasi() {
         return lokasi;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    // Method untuk menambah order ke orderHistory
-    public void addOrderHistory(Order order) {
-        orderHistory.add(order);
-    }
-
-    // Getter untuk orderHistory
-    public ArrayList<Order> getOrderHistory() {
-        return orderHistory;
-    }
-
-    public boolean isOrderBelongsToUser(String orderId) {
-        for (Order order : orderHistory) {
-            if (order.getOrderID().equals(orderId)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    // Getter payment
     public DepeFoodPaymentSystem getPayment() {
         return payment;
     }
 
-    public void setPayment(DepeFoodPaymentSystem payment) {
-        this.payment = payment;
-    }
-
+    // Getter saldo
     public long getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(long saldo) {
-        this.saldo = saldo;
+    // Add order history
+    public void addOrderHistory(Order order) {
+        orderHistory.add(order);
     }
 
-    @Override
-    public String toString() {
-        return String.format("User dengan nama %s dan nomor telepon %s", nama, nomorTelepon);
+    // Getter order history
+    public ArrayList<Order> getOrderHistory() {
+        return orderHistory;
     }
 }

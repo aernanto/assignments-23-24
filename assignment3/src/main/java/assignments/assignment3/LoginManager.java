@@ -7,10 +7,12 @@ package assignments.assignment3;
 
 import assignments.assignment3.systemCLI.UserSystemCLI;
 
+// Definisi Login Manager
 public class LoginManager {
     private UserSystemCLI adminSystem;
     private UserSystemCLI customerSystem;
 
+    // Constructor Login Manager
     public LoginManager(UserSystemCLI adminSystem, UserSystemCLI customerSystem) {
         this.adminSystem = adminSystem;
         this.customerSystem = customerSystem;

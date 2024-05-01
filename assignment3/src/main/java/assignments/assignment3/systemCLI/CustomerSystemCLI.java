@@ -14,17 +14,20 @@ import assignments.assignment2.Order;
 import assignments.assignment2.Restaurant;
 import assignments.assignment2.User;
 
+// Customer System CLI
 public class CustomerSystemCLI implements UserSystemCLI {
     private Scanner input;
     private ArrayList<Restaurant> restoList;
     private ArrayList<User> userList;
 
+    // Constructor Customer System CLI
     public CustomerSystemCLI(Scanner input, ArrayList<Restaurant> restoList, ArrayList<User> userList) {
         this.input = input;
         this.restoList = restoList;
         this.userList = userList;
     }
 
+    // Display menu
     @Override
     public void displayMenu() {
         System.out.println("\n--------------------------------------------");
@@ -39,6 +42,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         System.out.print("Pilihan menu: ");
     }
 
+    // Handle menu
     @Override
     public boolean handleMenu(int command) {
         switch (command) {
@@ -65,6 +69,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         }
     }
 
+    // handle Buat Pesanan
     private void handleBuatPesanan() {
         System.out.println("\n--------------Buat Pesanan----------------");
         System.out.print("Nama Restoran: ");
@@ -116,6 +121,17 @@ public class CustomerSystemCLI implements UserSystemCLI {
         user.getOrderHistory().add(order);
     }
 
+    // Get menu from restaurant
+    private Menu getMenuFromRestaurant(Restaurant restaurant, String itemName) {
+        for (Menu menu : restaurant.getMenu()) {
+            if (menu.getNamaMakanan().equalsIgnoreCase(itemName)) {
+                return menu;
+            }
+        }
+        return null; 
+    }    
+
+    // Handle cetak bill
     private void handleCetakBill() {
         System.out.println("\n--------------Cetak Bill----------------");
         System.out.print("Masukkan Order ID: ");
@@ -128,6 +144,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         System.out.println(generateBill(order));
     }
 
+    // Handle lihat menu
     private void handleLihatMenu() {
         System.out.println("\n--------------Lihat Menu----------------");
         System.out.print("Nama Restoran: ");
@@ -143,6 +160,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         });
     }
 
+    // Handle bayar bill
     private void handleBayarBill() {
         System.out.println("\n--------------Bayar Bill----------------");
         System.out.print("Masukkan Order ID: ");
@@ -158,7 +176,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
             return;
         }
         long amountToPay = calculateTotalBill(order);
-        long result = user.getPaymentMethod().processPayment(amountToPay);
+        long result = user.getPayment().processPayment(amountToPay);
         if (result == 0) {
             System.out.println("Pembayaran berhasil.");
             order.setOrderFinished(true);
@@ -167,6 +185,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         }
     }
 
+    // Handle cek saldo
     private void handleCekSaldo() {
         System.out.println("\n--------------Cek Saldo----------------");
         System.out.print("Nama Pengguna: ");
@@ -179,17 +198,18 @@ public class CustomerSystemCLI implements UserSystemCLI {
         System.out.println("Saldo saat ini: Rp " + user.getSaldo());
     }
 
-    // Utility and helper methods
+    // Method helper
     private Restaurant getRestaurant(String name) {
-        String nameLowerCase = name.toLowerCase(); // Convert input to lowercase
+        String nameLowerCase = name.toLowerCase(); 
         for (Restaurant restaurant : restoList) {
-            if (restaurant.getNama().toLowerCase().equals(nameLowerCase)) { // Convert restaurant name to lowercase for comparison
+            if (restaurant.getNama().toLowerCase().equals(nameLowerCase)) { 
                 return restaurant;
             }
         }
         return null;
     }    
 
+    // Constructor getUser
     private User getUser(String name, String phone) {
         for (User user : userList) {
             if (user.getNama().equalsIgnoreCase(name) && user.getNomorTelepon().equals(phone)) {
@@ -199,6 +219,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         return null;
     }    
 
+    // Kalau tanggal valid
     private boolean isValidTanggal(String tanggal) {
         if (tanggal.length() != 10 || tanggal.charAt(2) != '/' || tanggal.charAt(5) != '/') {
             return false;
@@ -229,6 +250,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
                nomorTelepon.substring(nomorTelepon.length() - 4);
     }
 
+    // Biaya delivery
     private int calculateDeliveryCharge(String lokasi) {
         switch (lokasi.toUpperCase()) {
             case "P": return 10000;
@@ -240,6 +262,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         }
     }    
 
+    // Getter order
     private Order getOrder(String orderID) {
         for (User user : userList) {
             for (Order order : user.getOrderHistory()) {
@@ -251,6 +274,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         return null;
     }
 
+    // generate bill
     private String generateBill(Order order) {
         StringBuilder bill = new StringBuilder("Bill:\nOrder ID: ").append(order.getOrderID()).append("\n");
         bill.append("Items:\n");
@@ -265,6 +289,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         return bill.toString();
     }
 
+    // Get user by order ID
     private User getUserByOrderID(String orderID) {
         for (User user : userList) {
             for (Order order : user.getOrderHistory()) {
@@ -276,6 +301,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         return null;
     }
 
+    // Kalkulasi total bill
     private long calculateTotalBill(Order order) {
         long total = 0;
         for (Menu item : order.getItems()) {
@@ -285,6 +311,7 @@ public class CustomerSystemCLI implements UserSystemCLI {
         return total;
     }
 
+    // Get user by name
     private User getUserByName(String name) {
         for (User user : userList) {
             if (user.getNama().equalsIgnoreCase(name)) {

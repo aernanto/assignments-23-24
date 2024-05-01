@@ -7,27 +7,36 @@ package assignments.assignment3;
 
 import java.util.ArrayList;
 
-// Class Restaurant, memuat nama dan menu dalam ArrayList
+// Definisi kelas Restaurant
 public class Restaurant {
     private String nama;
-    private String lokasi; 
+    private String lokasi;
     private ArrayList<Menu> menu;
 
-    public Restaurant(String nama, String lokasi, ArrayList<Menu> menu) {
+    // Constructor Restaurant
+    public Restaurant(String nama, String lokasi) {
         this.nama = nama;
         this.lokasi = lokasi;
-        this.menu = menu;
+        this.menu = new ArrayList<>();
     }
 
+    // Getter nama
     public String getNama() {
         return nama;
     }
 
-    public String getLokasi() { 
+    // Getter lokasi
+    public String getLokasi() {
         return lokasi;
     }
 
+    // Getter menu
     public ArrayList<Menu> getMenu() {
         return menu;
+    }
+
+    // new menu
+    public void addMenu(Menu newMenu) {
+        menu.add(newMenu);
     }
 }
