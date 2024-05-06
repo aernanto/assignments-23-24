@@ -1,5 +1,6 @@
 package assignments.assignment3.payment;
 
+<<<<<<< HEAD
 // Definisi credit card payment
 public class CreditCardPayment implements DepeFoodPaymentSystem {
     private static final double TRANSACTION_FEE_PERCENTAGE = 0.02;
@@ -45,5 +46,13 @@ public class CreditCardPayment implements DepeFoodPaymentSystem {
         if (saldo >= 0) {
             this.saldo = saldo;
         }
+=======
+public class CreditCardPayment implements DepeFoodPaymentSystem {
+    private static final double TRANSACTION_FEE_PERCENTAGE = 0.02;
+
+    @Override
+    public long processPayment(long saldo, long amount) {
+        return amount + (long) (amount * TRANSACTION_FEE_PERCENTAGE);
+>>>>>>> 2de87934941926ea08452f88727b4221a5edf9d5
     }
 }

@@ -19,12 +19,18 @@ public class LoginManager {
     }
 
     public UserSystemCLI getSystem(String role) {
+<<<<<<< HEAD
         if (role.equalsIgnoreCase("admin")) {
             return adminSystem;
         } else if (role.equalsIgnoreCase("customer")) {
+=======
+        if (role.equals("Customer")) {
+>>>>>>> 2de87934941926ea08452f88727b4221a5edf9d5
             return customerSystem;
         } else {
             return null;
         }
+
+        return adminSystem;
     }
 }
