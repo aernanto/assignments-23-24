@@ -1,28 +1,3 @@
-<<<<<<< HEAD
-/*  Nama    : Aimee Callista Ferlintera Prudence Ernanto
-    NPM     : 2306165963
-    Kelas   : DDP 2-B
- */
-
-package assignments.assignment3;
-
-import java.util.ArrayList;
-
-// Definisi kelas Restaurant
-public class Restaurant {
-    private String nama;
-    private String lokasi;
-    private ArrayList<Menu> menu;
-
-    // Constructor Restaurant
-    public Restaurant(String nama, String lokasi) {
-        this.nama = nama;
-        this.lokasi = lokasi;
-        this.menu = new ArrayList<>();
-    }
-
-    // Getter nama
-=======
 package assignments.assignment3;
 
 import java.text.DecimalFormat;
@@ -39,35 +14,18 @@ public class Restaurant {
         this.menu = new ArrayList<>();
     }
 
->>>>>>> 2de87934941926ea08452f88727b4221a5edf9d5
     public String getNama() {
         return nama;
     }
 
-<<<<<<< HEAD
-    // Getter lokasi
-    public String getLokasi() {
-        return lokasi;
-    }
-
-    // Getter menu
-=======
     public void addMenu(Menu newMenu) {
         menu.add(newMenu);
     }
 
->>>>>>> 2de87934941926ea08452f88727b4221a5edf9d5
     public ArrayList<Menu> getMenu() {
         return menu;
     }
 
-<<<<<<< HEAD
-    // new menu
-    public void addMenu(Menu newMenu) {
-        menu.add(newMenu);
-    }
-}
-=======
     private ArrayList<Menu> sortMenu() {
         Menu[] menuArr = new Menu[menu.size()];
         for (int i = 0; i < menu.size(); i++) {
@@ -105,4 +63,3 @@ public class Restaurant {
         return menuString.toString();
     }
 }
->>>>>>> 2de87934941926ea08452f88727b4221a5edf9d5

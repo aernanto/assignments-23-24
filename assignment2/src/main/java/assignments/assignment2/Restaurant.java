@@ -1,32 +1,5 @@
-/*  Nama    : Aimee Callista Ferlintera Prudence Ernanto
-    NPM     : 2306165963
-    Kelas   : DDP 2-B
- */
-
 package assignments.assignment2;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-
-// Class Restaurant, memuat nama dan menu dalam ArrayList
-public class Restaurant {
-    private String nama;
-    private ArrayList<Menu> menu;
-
-    public Restaurant(String nama, ArrayList<Menu> menu) {
-        this.nama = nama;
-        this.menu = menu;
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public ArrayList<Menu> getMenu() {
-        return menu;
-    }
-}
-=======
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -85,4 +58,3 @@ public class Restaurant {
         return menuString.toString();
     }
 }
->>>>>>> 2de87934941926ea08452f88727b4221a5edf9d5

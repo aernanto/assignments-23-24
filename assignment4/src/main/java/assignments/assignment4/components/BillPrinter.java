@@ -2,53 +2,91 @@ package assignments.assignment4.components;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 import assignments.assignment3.DepeFood;
 import assignments.assignment3.Menu;
 import assignments.assignment3.Order;
-import assignments.assignment3.User;
-import assignments.assignment4.MainApp;
 
 public class BillPrinter {
-    private Stage stage;
-    private MainApp mainApp;
-    private User user;
-
-    public BillPrinter(Stage stage, MainApp mainApp, User user) {
-        this.stage = stage;
-        this.mainApp = mainApp;
-        this.user = user;
+    public BillPrinter(Stage stage) {
     }
 
-    private Scene createBillPrinterForm(){
-        //TODO: Implementasi untuk menampilkan komponen hasil cetak bill
+    private Scene createBillPrinterForm() {
         VBox layout = new VBox(10);
 
-        return new Scene(layout, 400, 200);
+        Label orderIdLabel = new Label("Order ID:");
+        TextField orderIdInput = new TextField();
+
+        TextArea billOutput = new TextArea();
+        billOutput.setEditable(false);
+
+        Button printButton = new Button("Print Bill");
+        printButton.setOnAction(e -> {
+            String orderId = orderIdInput.getText().trim();
+            printBill(orderId, billOutput);
+        });
+
+        layout.getChildren().addAll(orderIdLabel, orderIdInput, printButton, billOutput);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(10));
+
+        return new Scene(layout, 400, 600);
     }
 
-    private void printBill(String orderId) {
-        //TODO: Implementasi validasi orderID
-        if (true) {
-
-        } else {
-
+    private void printBill(String orderId, TextArea billOutput) {
+        Order order = DepeFood.getOrderOrNull(orderId);
+        if (order == null) {
+            billOutput.setText("Order ID tidak dapat ditemukan.");
+            return;
         }
+        billOutput.setText(outputBillPesanan(order));
+    }
+
+    private String outputBillPesanan(Order order) {
+        return String.format(
+                "Bill:%nOrder ID: %s%nTanggal Pemesanan: %s%nLokasi Pengiriman: %s%nStatus Pengiriman: %s%nPesanan:%n%s%nBiaya Ongkos Kirim: Rp %s%nTotal Biaya: Rp %s%n",
+                order.getOrderId(), order.getTanggal(), order.getRestaurant().getNama(), 
+                order.getOrderFinished() ? "Finished" : "Not Finished", 
+                getMenuPesananOutput(order), 
+                formatCurrency(order.getOngkir()), 
+                formatCurrency(order.getTotalHarga()));
+    }
+
+    private String getMenuPesananOutput(Order order) {
+        StringBuilder pesananBuilder = new StringBuilder();
+        for (Menu menu : order.getSortedMenu()) {
+            pesananBuilder.append("- ").append(menu.getNamaMakanan()).append(" ").append(formatCurrency(menu.getHarga())).append("\n");
+        }
+        if (pesananBuilder.length() > 0) {
+            pesananBuilder.deleteCharAt(pesananBuilder.length() - 1);
+        }
+        return pesananBuilder.toString();
+    }
+
+    private String formatCurrency(double amount) {
+        DecimalFormat decimalFormat = new DecimalFormat();
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+        decimalFormat.setDecimalFormatSymbols(symbols);
+        return decimalFormat.format(amount);
     }
 
     public Scene getScene() {
         return this.createBillPrinterForm();
     }
 
-    // Class ini opsional
     public class MenuItem {
         private final StringProperty itemName;
         private final StringProperty price;

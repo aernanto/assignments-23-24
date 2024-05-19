@@ -1,17 +1,5 @@
-/*  Nama    : Aimee Callista Ferlintera Prudence Ernanto
-    NPM     : 2306165963
-    Kelas   : DDP 2-B
- */
-
 package assignments.assignment3.systemCLI;
 
-<<<<<<< HEAD
-// Interface UserSystemCLI
-public interface UserSystemCLI {
-    void displayMenu();
-    boolean handleMenu(int command);
-    void run();
-=======
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -171,5 +159,4 @@ public abstract class UserSystemCLI {
     public void setInput(Scanner input) {
         this.input = input;
     }
->>>>>>> 2de87934941926ea08452f88727b4221a5edf9d5
 }

@@ -1,4 +1,6 @@
-package assignments.assignment2;
+// SOLUSI TP 1
+
+package assignments.assignment4.page;
 
 import java.util.Scanner;
 import java.text.DecimalFormat;
